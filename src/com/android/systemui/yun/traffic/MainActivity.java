@@ -1,13 +1,8 @@
-package com.hqucsx.traffic_monitor;
+package com.android.systemui.yun.traffic;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.opengl.Visibility;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.widget.Button;
-import android.widget.TextView;
 
 public class MainActivity extends Activity {
     private Intent timeService = null;  

@@ -1,4 +1,4 @@
-package com.hqucsx.traffic_monitor; 
+package com.android.systemui.yun.traffic; 
  
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,15 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
  
 public class HandlerService extends Service{ 
-    private Timer timer = null;   
-    private SimpleDateFormat sdf = null;    
+
     private long total_data = TrafficStats.getTotalRxBytes();
     private Handler mHandler;
     //几秒刷新一次
     private final int count = 3;
-    NettrafficReceiver NettrafficReceiver;
-    public static final String STATUSBAR_TRAFFIC="YUN";
-    private Intent timeService = null;  
     private Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
@@ -51,10 +47,6 @@ public class HandlerService extends Service{
     @Override 
     public void onCreate() { 
         super.onCreate();
-        NettrafficReceiver=new NettrafficReceiver();
-        IntentFilter trafficFilter=new IntentFilter();
-        trafficFilter.addAction(STATUSBAR_TRAFFIC);
-        registerReceiver(NettrafficReceiver, trafficFilter);
         mHandler = new Handler(){
             @Override
             public void handleMessage(final Message msg) {
@@ -94,20 +86,7 @@ public class HandlerService extends Service{
         super.onDestroy(); 
          
     } 
-    public class NettrafficReceiver extends BroadcastReceiver{
-    	public void onReceive(Context context, Intent intent) {
-    	Boolean msg=intent.getBooleanExtra("nettraffic", false);//接收信息
-    	if(msg==true){
-    		System.out.println("开关打开！");
-    		onCreate();
-    	}
-    	else {
-    		System.out.println("开关关闭！");
-    		timeService = new Intent(); 
-   		 	
-    	}
-    	}
-    	}
+
      
      
 } 
